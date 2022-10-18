@@ -17,14 +17,14 @@ import 'swiper/css/free-mode';
 
 const TopChartCard = ({
   song,
-  index,
+  i,
   activeSong,
   isPlaying,
   handlePauseClick,
   handlePlayClick,
 }) => (
   <div className="w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
-    <h3 className="font-bold text-base text-white mr-3">{index + 1}.</h3>
+    <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
     <div className="flex-1 flex flex-row justify-between items-center">
       <img src={song?.images.coverart} alt={song?.title} className="w-20 h-20 rounded-lg" />
       <div className="flex-1 flex flex-col justify-center mx-3">
@@ -61,8 +61,8 @@ const TopPlay = () => {
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
-  const handlePlayClick = (song, index) => {
-    dispatch(setActiveSong({ data, song, index }));
+  const handlePlayClick = (song, i) => {
+    dispatch(setActiveSong({ data, song, i }));
     dispatch(playPause(true));
   };
 
@@ -78,15 +78,15 @@ const TopPlay = () => {
           </Link>
         </div>
         <div className="mt-4 flex flex-col gap-1">
-          {topPlays?.map((song, index) => (
+          {topPlays?.map((song, i) => (
             <TopChartCard
               key={song.key}
               song={song}
-              index={index}
+              i={i}
               isPlaying={isPlaying}
               activeSong={activeSong}
               handlePauseClick={handlePauseClick}
-              handlePlayClick={() => handlePlayClick(song, index)}
+              handlePlayClick={() => handlePlayClick(song, i)}
             />
           ))}
         </div>
@@ -106,7 +106,7 @@ const TopPlay = () => {
           centeredSlidesBounds
           modules={[FreeMode]}
           className="mt-4">
-          {topPlays?.map((song, index) => (
+          {topPlays?.map((song, i) => (
             <SwiperSlide
               key={song.key}
               style={{ width: '25%', height: 'auto' }}
